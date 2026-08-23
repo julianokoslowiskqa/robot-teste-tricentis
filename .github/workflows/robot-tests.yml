@@ -1,0 +1,106 @@
+name: Testes Robot Framework
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  testes:
+    name: ${{ matrix.nome }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: smoke
+            nome: Smoke - acesso à aplicação
+            robot_args: --include smoke tests
+          - id: insurant-data
+            nome: Enter Insurant Data
+            robot_args: --include insurant-data tests/features/vehicle_insurance.feature.robot
+          - id: quote
+            nome: Cotação completa
+            robot_args: --include quote tests/features/vehicle_insurance.feature.robot
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Poetry
+        run: pip install poetry==2.4.1
+
+      - name: Instalar dependências Python
+        run: poetry install --no-interaction
+
+      - name: Inicializar Browser e Playwright
+        run: poetry run rfbrowser init
+
+      - name: Executar testes
+        run: >
+          poetry run robot
+          --listener allure_robotframework
+          --variable HEADLESS:True
+          --outputdir results
+          ${{ matrix.robot_args }}
+
+      - name: Publicar evidências da execução
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-${{ matrix.id }}
+          path: |
+            results/
+            output/allure/
+          if-no-files-found: warn
+
+  relatorio-allure:
+    name: Relatório Allure
+    needs: testes
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar resultados de todos os jobs paralelos
+        uses: actions/download-artifact@v4
+        with:
+          pattern: evidencias-*
+          path: allure-artifacts
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Instalar Allure Commandline
+        run: npm install --global allure-commandline
+
+      - name: Gerar relatório unificado
+        shell: bash
+        run: |
+          mapfile -t result_dirs < <(find allure-artifacts -type d -path '*/output/allure')
+          if [ "${#result_dirs[@]}" -eq 0 ]; then
+            echo 'Nenhum resultado Allure foi encontrado.'
+            exit 1
+          fi
+          allure generate "${result_dirs[@]}" --clean --output allure-report
+
+      - name: Publicar relatório Allure
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-allure
+          path: allure-report/

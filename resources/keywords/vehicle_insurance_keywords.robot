@@ -7,9 +7,13 @@ Resource    ../pages/select_price_option_page.robot
 Resource    ../pages/send_quote_page.robot
 
 
+*** Variables ***
+${HEADLESS}    ${False}
+
+
 *** Keywords ***
 Iniciar Navegador
-    New Browser    chromium    headless=False
+    New Browser    chromium    headless=${HEADLESS}
     Set Browser Timeout    10s
 
 

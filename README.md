@@ -115,6 +115,18 @@ allure generate output\allure --clean --output allure-report
 
 Abra o arquivo `allure-report/index.html` no navegador para visualizar o relatório.
 
+## GitHub Actions
+
+O workflow [robot-tests.yml](.github/workflows/robot-tests.yml) executa automaticamente em `push` e `pull request` para a branch `master`. Ele também pode ser iniciado manualmente pela aba **Actions** do GitHub.
+
+Para reduzir o tempo de execução, os cenários são divididos em três jobs paralelos:
+
+1. **Smoke - acesso à aplicação**;
+2. **Enter Insurant Data**;
+3. **Cotação completa**.
+
+Todos os jobs executam o Chromium em modo headless, instalam as dependências com Poetry e publicam os logs do Robot e os dados do Allure como artefatos. Ao final, o job **Relatório Allure** reúne os resultados dos três jobs e disponibiliza o relatório HTML para download.
+
 ## Cenários automatizados
 
 O arquivo `tests/features/vehicle_insurance.feature.robot` contém cenários em estilo BDD (`Given`, `When`, `Then`):
