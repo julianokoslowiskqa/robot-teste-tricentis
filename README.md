@@ -113,7 +113,20 @@ Os dados do Allure serão criados em `output/allure`. Em seguida, gere o relató
 allure generate output\allure --clean --output allure-report
 ```
 
-Abra o arquivo `allure-report/index.html` no navegador para visualizar o relatório.
+Não abra `allure-report/index.html` com duplo clique, pois o navegador bloqueia o carregamento dos dados do Allure pelo protocolo `file:///`. Para visualizar o relatório, inicie o servidor local do Allure:
+
+```powershell
+allure open allure-report
+```
+
+O comando abrirá automaticamente o relatório no navegador. Caso o Allure CLI não esteja disponível, inicie um servidor HTTP na pasta do relatório:
+
+```powershell
+cd allure-report
+python -m http.server 8000
+```
+
+Depois, acesse `http://localhost:8000` no navegador.
 
 ## GitHub Actions
 
