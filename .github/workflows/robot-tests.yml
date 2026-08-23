@@ -45,7 +45,7 @@ jobs:
         run: pip install poetry==2.4.1
 
       - name: Instalar dependências Python
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction --no-root
 
       - name: Inicializar Browser e Playwright
         run: poetry run rfbrowser init

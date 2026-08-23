@@ -58,7 +58,7 @@ poetry env use 3.11
 Instale todas as dependências declaradas no `pyproject.toml`:
 
 ```powershell
-poetry install
+poetry install --no-root
 ```
 
 Inicialize a parte Node.js/Playwright da biblioteca Browser. Esse comando deve ser executado pelo menos uma vez após instalar ou atualizar `robotframework-browser`:
@@ -217,7 +217,7 @@ Confirme que o Poetry está usando uma versão compatível do Python e que a red
 
 ```powershell
 poetry env use 3.11
-poetry install
+poetry install --no-root
 poetry run rfbrowser init
 ```
 
