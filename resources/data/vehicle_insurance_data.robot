@@ -1,0 +1,32 @@
+*** Variables ***
+
+# Dados determinísticos, exclusivos do cenário de cotação.
+${VEHICLE_MAKE}    Audi
+${VEHICLE_ENGINE_PERFORMANCE}    110
+${VEHICLE_MANUFACTURE_DATE}    01/01/2020
+${VEHICLE_NUMBER_OF_SEATS}    5
+${VEHICLE_FUEL_TYPE}    Petrol
+${VEHICLE_LIST_PRICE}    30000
+${VEHICLE_LICENSE_PLATE}    ROB1234
+${VEHICLE_ANNUAL_MILEAGE}    12000
+
+${INSURANT_FIRST_NAME}    primeiro
+${INSURANT_LAST_NAME}    segundo
+${INSURANT_BIRTH_DATE}    12/21/1990
+${INSURANT_STREET_ADDRESS}    Rua da Automação, 123
+${INSURANT_COUNTRY}    Brazil
+${INSURANT_ZIP_CODE}    12345
+${INSURANT_CITY}    New York
+${INSURANT_OCCUPATION}    Employee
+
+${PRODUCT_START_DATE}    12/31/2030
+${PRODUCT_INSURANCE_SUM}    3000000
+${PRODUCT_MERIT_RATING}    Bonus 1
+${PRODUCT_DAMAGE_INSURANCE}    Full Coverage
+${PRODUCT_COURTESY_CAR}    Yes
+
+${QUOTE_EMAIL}    robot.tricentis@example.com
+${QUOTE_PHONE}    11999999999
+${QUOTE_USERNAME}    robot.tricentis
+${QUOTE_PASSWORD}    Robot@123
+${QUOTE_COMMENTS}    Cotação criada pelo teste automatizado Robot Framework.

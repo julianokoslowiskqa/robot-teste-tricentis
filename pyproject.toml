@@ -1,0 +1,19 @@
+[project]
+name = "robot-tricentis"
+version = "0.1.0"
+description = "Projeto de automação Robot Framework"
+authors = [
+    {name = "Juliano"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "robotframework",
+    "robotframework-browser",
+    "allure-robotframework"
+]
+
+[dependency-groups]
+dev = [
+    "robotframework-tidy"
+]

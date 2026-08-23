@@ -1,0 +1,9 @@
+results/
+browser/
+output.xml
+log.html
+report.html
+playwright-log.txt
+__pycache__/
+*.pyc
+.venv/
