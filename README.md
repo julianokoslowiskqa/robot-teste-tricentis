@@ -1,8 +1,12 @@
-# Robot Tricentis
+# Framework de Teste Automatizado com Robot Framework, Browser e Playwright
 
-Projeto de automação end-to-end da aplicação [Tricentis Vehicle Insurance](http://sampleapp.tricentis.com/101/app.php), construído com **Robot Framework**, biblioteca **Browser** e **Playwright**.
+Este é um projeto de estudo de automação de testes web criado com Robot Framework.
 
-O fluxo automatizado simula a criação de uma cotação de seguro de automóvel: preenche os dados do veículo, segurado e produto, escolhe o plano Gold, envia a cotação e confirma a mensagem `Sending e-mail success!`.
+Nele, automatizei o fluxo de cotação de seguro da aplicação [Tricentis Vehicle Insurance](http://sampleapp.tricentis.com/101/app.php). O teste acessa o site, preenche os dados do veículo, do segurado e do produto, escolhe uma opção de preço, envia a cotação e valida a mensagem final de sucesso.
+
+O objetivo é demonstrar uma estrutura simples, organizada e fácil de evoluir, usando BDD e o padrão Page Object Model. Os locators, as ações de cada tela e os dados de teste ficam separados para tornar a manutenção mais tranquila.
+
+Fique à vontade para baixar o projeto, executar os testes e utilizá-lo como referência para aprender Robot Framework e automação web com Playwright.
 
 ## Tecnologias e versões
 
@@ -19,7 +23,7 @@ O fluxo automatizado simula a criação de uma cotação de seguro de automóvel
 
 As versões resolvidas ficam registradas em `poetry.lock`, garantindo uma instalação reproduzível.
 
-## Pré-requisitos
+## Requisitos
 
 Antes de executar, instale:
 
@@ -37,7 +41,7 @@ poetry --version
 git --version
 ```
 
-## Configuração do projeto
+## Como preparar o projeto
 
 Clone o repositório e entre na pasta do projeto:
 
@@ -66,21 +70,21 @@ poetry run rfbrowser init
 
 > Se o ambiente corporativo bloquear downloads, configure o proxy de rede antes de executar o comando acima. O Chromium é necessário para os testes.
 
-## Executando os testes
+## Como rodar o projeto
 
-Execute a feature completa:
+Depois de concluir a preparação, execute a feature completa com:
 
 ```powershell
 poetry run robot --outputdir results tests\features\vehicle_insurance.feature.robot
 ```
 
-Execute somente o cenário end-to-end de envio da cotação:
+Se quiser executar somente o fluxo completo de envio da cotação:
 
 ```powershell
 poetry run robot --outputdir results --include quote tests\features\vehicle_insurance.feature.robot
 ```
 
-Execute apenas o cenário da etapa **Enter Insurant Data**:
+Para executar apenas o cenário da etapa **Enter Insurant Data**:
 
 ```powershell
 poetry run robot --outputdir results --include insurant-data tests\features\vehicle_insurance.feature.robot
@@ -109,7 +113,7 @@ O arquivo `tests/features/vehicle_insurance.feature.robot` contém cenários em 
    - Preencher **Send Quote** e acionar **Send**;
    - Validar a mensagem `Sending e-mail success!`.
 
-## Arquitetura
+## Como o projeto foi organizado
 
 O projeto adota o padrão **Page Object Model (POM)** para evitar que regras de fluxo e locators fiquem misturados:
 
