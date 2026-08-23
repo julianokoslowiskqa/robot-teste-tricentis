@@ -98,6 +98,24 @@ Ao término, os artefatos gerados ficam em `results/`:
 | `log.html` | Log detalhado por keyword |
 | `output.xml` | Resultado XML do Robot Framework |
 
+## Relatório Allure
+
+Além dos relatórios nativos do Robot Framework, o projeto possui a dependência `allure-robotframework` para gerar um relatório visual com os detalhes da execução.
+
+Com o [Allure Commandline](https://allurereport.org/docs/install/) instalado, execute todos os testes com o listener do Allure:
+
+```powershell
+poetry run robot --listener allure_robotframework --outputdir results tests
+```
+
+Os dados do Allure serão criados em `output/allure`. Em seguida, gere o relatório HTML:
+
+```powershell
+allure generate output\allure --clean --output allure-report
+```
+
+Abra o arquivo `allure-report/index.html` no navegador para visualizar o relatório.
+
 ## Cenários automatizados
 
 O arquivo `tests/features/vehicle_insurance.feature.robot` contém cenários em estilo BDD (`Given`, `When`, `Then`):

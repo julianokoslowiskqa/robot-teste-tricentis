@@ -1,4 +1,6 @@
 results/
+output/
+allure-report/
 browser/
 output.xml
 log.html
