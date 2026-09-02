@@ -1,5 +1,5 @@
 # Framework de Teste Automatizado com Robot Framework
-Este é um projeto de estudo de automação de testes web criado com Robot Framework.
+Este é um projeto de automação de testes web criado com Robot Framework.
 
 Nele, automatizei o fluxo de cotação de seguro da aplicação [Tricentis Vehicle Insurance](http://sampleapp.tricentis.com/101/app.php). O teste acessa o site, preenche os dados do veículo, do segurado e do produto, escolhe uma opção de preço, envia a cotação e valida a mensagem final de sucesso.
 
